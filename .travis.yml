@@ -12,7 +12,10 @@ before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 script:
-  - bash build-all.sh
+  - docker build --build-arg PYTHON_VERSION=3.7 --build-arg ALPINE_VERSION=3.8 --build-arg PYINSTALLER_TAG=v3.4 -t aquavitae/pyinstaller-alpine:3.8 .
+  - docker build --build-arg PYTHON_VERSION=3.7 --build-arg ALPINE_VERSION=3.9 --build-arg PYINSTALLER_TAG=v3.4 -t aquavitae/pyinstaller-alpine:3.9 .
+  - docker push aquavitae/pyinstaller-alpine:3.8
+  - docker push aquavitae/pyinstaller-alpine:3.9
 
 branches:
   only:
